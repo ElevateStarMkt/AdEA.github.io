@@ -5,23 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ajustes de perfil - AdEA</title>
     <meta name="description" content="Gestiona tu contraseña y preferencias en el panel privado de AdEA.">
-    
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="./favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style-panel.css">
-    
-    <!-- GTM + Meta Pixel (igual que en panel.html) -->
+    <!-- GTM + Meta Pixel -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WJJXN3SD');</script>
     <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','870092382345285');fbq('track','PageView');</script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=870092382345285&ev=PageView&noscript=1"/></noscript>
 </head>
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJJXN3SD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
     <header class="header">
         <div class="container">
             <a href="./" class="logo-link" aria-label="Ir a la página principal de AdEA">
@@ -35,14 +31,12 @@
             </svg>
         </button>
     </header>
-
     <main class="panel-container">
         <div class="container">
             <section class="panel-header">
                 <h2>Ajustes de perfil</h2>
                 <p>Protege tu cuenta con una contraseña segura.</p>
             </section>
-
             <section class="panel-section">
                 <div class="action-card">
                     <form id="change-password-form">
@@ -64,21 +58,17 @@
                     <div id="password-message" class="login-error hidden"></div>
                 </div>
             </section>
-
             <div class="back-to-panel">
                 <a href="./panel.html" class="btn btn-text">← Volver al panel</a>
             </div>
         </div>
     </main>
-
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 AdEA — Asociación de Escritores Ɐnónimos</p>
             <p><a href="./aviso-legal.html">Aviso legal</a> | <a href="./faq.html">Preguntas frecuentes</a></p>
         </div>
     </footer>
-
-    <!-- Componentes comunes -->
     <div id="cookie-banner" class="cookie-banner hidden">
         <p>Utilizamos cookies para analizar el tráfico y mejorar tu experiencia.</p>
         <div class="cookie-buttons">
@@ -86,14 +76,12 @@
             <a href="./aviso-legal.html" class="btn btn-text">Más información</a>
         </div>
     </div>
-
     <a href="https://t.me/adea_oficial" id="floating-telegram" aria-label="Contactar por Telegram">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
     </a>
-
     <script src="https://npmcdn.com/parse@3.4.0/dist/parse.min.js"></script>
-    <script src="script-panel.js"></script>
+    <script src="./script-panel.js"></script>
 </body>
 </html>

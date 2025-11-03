@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar sesión - Panel AdEA</title>
-    <meta name="description" content="Área privada para autores miembros de AdEA. Accede a tus estadísticas mensuales y gestiona tu perfil.">
+    <meta name="description"
+        content="Área privada para autores miembros de AdEA. Accede a tus estadísticas mensuales y gestiona tu perfil.">
 
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -13,22 +15,27 @@
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
 
     <!-- Estilos principales + panel -->
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style-panel.css">
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WJJXN3SD');</script>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WJJXN3SD');</script>
 
     <!-- Meta Pixel -->
-    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','870092382345285');fbq('track','PageView');</script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=870092382345285&ev=PageView&noscript=1"/></noscript>
+    <script>!function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '870092382345285'); fbq('track', 'PageView');</script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=870092382345285&ev=PageView&noscript=1" /></noscript>
 </head>
+
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJJXN3SD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJJXN3SD" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
 
     <header class="header">
         <div class="container">
@@ -38,7 +45,8 @@
             <p class="tagline">La voz del futuro no tiene rostro.</p>
         </div>
         <button id="theme-toggle" aria-label="Cambiar tema" class="theme-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
         </button>
@@ -48,7 +56,7 @@
         <div class="login-card">
             <h2>Acceso al panel privado</h2>
             <p>Introduce las credenciales que te facilitamos al unirte a AdEA.</p>
-            
+
             <form id="login-form">
                 <div class="form-group">
                     <label for="username">Usuario</label>
@@ -84,7 +92,8 @@
 
     <!-- Botón flotante de Telegram -->
     <a href="https://t.me/adea_oficial" id="floating-telegram" aria-label="Contactar por Telegram">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
     </a>
@@ -92,5 +101,73 @@
     <!-- Parse SDK + script del panel -->
     <script src="https://npmcdn.com/parse@3.4.0/dist/parse.min.js"></script>
     <script src="./script-panel.js"></script>
+    <script>
+        // Inicializar Parse// Inicializar Parse (Back4App)
+        Parse.initialize("S88jCtz1uP0qT7s0Fe1fp9aJzUB7YmjIuHd5o06p", "XlOB40PLJiE7LXcAL4rww2HM4ksg9u6YbEPGRhJz");
+        Parse.serverURL = 'https://parseapi.back4app.com/';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cookie banner y tema (igual que antes)
+            const banner = document.getElementById('cookie-banner');
+            const acceptBtn = document.getElementById('accept-cookies');
+            if (banner && acceptBtn) {
+                if (!localStorage.getItem('cookiesAccepted')) {
+                    banner.classList.remove('hidden');
+                }
+                acceptBtn.addEventListener('click', () => {
+                    localStorage.setItem('cookiesAccepted', 'true');
+                    banner.classList.add('hidden');
+                });
+            }
+
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                const htmlEl = document.documentElement;
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                if (savedTheme === 'paper') {
+                    htmlEl.setAttribute('data-theme', 'paper');
+                    updateThemeIcon('paper');
+                }
+                themeToggle.addEventListener('click', () => {
+                    const current = htmlEl.getAttribute('data-theme') || 'dark';
+                    const newTheme = current === 'dark' ? 'paper' : 'dark';
+                    htmlEl.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    updateThemeIcon(newTheme);
+                });
+            }
+
+            // Login con Back4App
+            document.getElementById('login-form')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+                const errorDiv = document.getElementById('login-error');
+
+                try {
+                    const user = await Parse.User.logIn(username, password);
+                    if (user) {
+                        window.location.href = 'panel.html';
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    errorDiv.textContent = 'Usuario o contraseña incorrectos.';
+                    errorDiv.classList.remove('hidden');
+                    setTimeout(() => errorDiv.classList.add('hidden'), 5000);
+                }
+            });
+        });
+
+        function updateThemeIcon(theme) {
+            const icon = document.querySelector('#theme-toggle svg');
+            if (!icon) return;
+            if (theme === 'paper') {
+                icon.innerHTML = '<circle cx="12" cy="12" r="5"></circle>...';
+            } else {
+                icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            }
+        }
+    </script>
 </body>
+
 </html>

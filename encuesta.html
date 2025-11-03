@@ -6,29 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Encuesta de activación - AdEA</title>
     <meta name="description" content="Completa esta encuesta para activar la promoción de tu obra en AdEA.">
-
     <link rel="icon" href="./favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style-panel.css">
-
     <!-- GTM + Meta Pixel -->
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WJJXN3SD');</script>
     <script>!function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '870092382345285'); fbq('track', 'PageView');</script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=870092382345285&ev=PageView&noscript=1" /></noscript>
-
 </head>
 
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJJXN3SD" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
-
     <header class="header">
         <div class="container">
             <a href="./" class="logo-link" aria-label="Ir a la página principal de AdEA">
@@ -43,26 +38,23 @@
             </svg>
         </button>
     </header>
-
     <main class="survey-container">
         <div class="container">
             <section class="panel-header">
                 <h2>Encuesta de activación</h2>
-                <p class="anonymous-id">Tu identificador: <strong>Ɐ-7429</strong></p>
+                <p class="anonymous-id">Tu identificador: <strong id="survey-user-id">Cargando...</strong></p>
                 <p>Completa esta información para iniciar la promoción de tu obra. Todos los campos son confidenciales.
                 </p>
             </section>
-
             <form id="activation-survey" class="survey-form">
                 <!-- Datos personales -->
                 <div class="form-group">
                     <label for="artistic-name">Nombre artístico *</label>
-                    <input type="text" id="artistic-name" placeholder="Ej: A. L. Novelist" required>
+                    <input type="text" id="artistic-name" name="nombreArtistico" required>
                 </div>
-
                 <div class="form-group">
                     <label for="country">País *</label>
-                    <select id="country" required>
+                    <select id="country" name="pais" required>
                         <option value="">Selecciona tu país</option>
                         <option value="es">España</option>
                         <option value="mx">México</option>
@@ -73,15 +65,13 @@
                         <option value="otros">Otros</option>
                     </select>
                 </div>
-
                 <div class="form-group birth-date-group">
                     <label>Fecha de nacimiento *</label>
                     <div class="date-selectors">
-                        <select id="birth-day" required>
+                        <select id="birth-day" name="diaNacimiento" required>
                             <option value="">Día</option>
-                            <!-- Opciones generadas por JS -->
                         </select>
-                        <select id="birth-month" required>
+                        <select id="birth-month" name="mesNacimiento" required>
                             <option value="">Mes</option>
                             <option value="1">Enero</option>
                             <option value="2">Febrero</option>
@@ -96,25 +86,21 @@
                             <option value="11">Noviembre</option>
                             <option value="12">Diciembre</option>
                         </select>
-                        <select id="birth-year" required>
+                        <select id="birth-year" name="anioNacimiento" required>
                             <option value="">Año</option>
-                            <!-- Opciones generadas por JS -->
                         </select>
                     </div>
-                    <p class="note">Solo usamos esta información para segmentar campañas por generación lectora.</p>
+                    <p class="note">Solo para segmentar por generación lectora.</p>
                 </div>
-
                 <hr class="form-divider">
-
                 <!-- Datos de la obra -->
                 <div class="form-group">
                     <label for="work-title">Título de la obra *</label>
-                    <input type="text" id="work-title" required>
+                    <input type="text" id="work-title" name="tituloObra" required>
                 </div>
-
                 <div class="form-group">
                     <label for="work-genre">Género literario *</label>
-                    <select id="work-genre" required>
+                    <select id="work-genre" name="generoObra" required>
                         <option value="">Selecciona...</option>
                         <option value="novela-historica">Novela histórica</option>
                         <option value="fantasia">Fantasía</option>
@@ -125,51 +111,41 @@
                         <option value="otros">Otros</option>
                     </select>
                 </div>
-
-                <div class="form-group" id="other-genre-field" style="display: none;">
+                <div class="form-group" id="other-genre-field" style="display:none;">
                     <label for="other-genre">Especifica el género</label>
-                    <input type="text" id="other-genre" placeholder="Ej: Novela gótica rural">
+                    <input type="text" id="other-genre" name="generoObraOtros">
                 </div>
-
                 <div class="form-group">
                     <label for="work-link">Enlace de compra o lectura *</label>
-                    <input type="url" id="work-link" placeholder="https://..." required>
+                    <input type="url" id="work-link" name="enlaceObra" placeholder="https://..." required>
                 </div>
-
                 <div class="form-group">
                     <label for="work-synopsis">Sinopsis (máx. 300 palabras) *</label>
-                    <textarea id="work-synopsis" rows="5" maxlength="1500" required></textarea>
+                    <textarea id="work-synopsis" name="sinopsis" rows="5" maxlength="1500" required></textarea>
                 </div>
-
                 <div class="form-group">
-                    <label>Sube tu obra en PDF (opcional)</label>
-                    <p class="note">Solo si deseas que la leamos para ajustar mejor la promoción. No se publicará.</p>
-                    <input type="file" id="work-pdf" accept=".pdf">
+                    <label>Enlace al PDF de tu obra (opcional)</label>
+                    <input type="url" name="pdfEnlace" placeholder="Ej: Google Drive, Dropbox...">
+                    <p class="note">Solo enlaces públicos. No se compartirá con terceros.</p>
                 </div>
-
                 <button type="submit" class="btn btn-primary">Enviar y activar promoción</button>
             </form>
-
-            <!-- Promoción de más libros -->
+            <br>
             <div class="extra-books-cta">
-                <h3>¿Quieres promocionar otra obra?</h3>
+                <h2>¿Quieres promocionar otra obra?</h2>
                 <p>En tu plan <strong>Básico</strong>, puedes promocionar hasta <strong>3 obras</strong> en total.</p>
                 <a href="https://t.me/adea_oficial?text=Hola, quiero añadir otra obra a mi promoción."
                     class="btn btn-secondary">Contactar para añadir obra</a>
             </div>
-
             <div id="survey-message" class="login-error hidden"></div>
         </div>
     </main>
-
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 AdEA — Asociación de Escritores Ɐnónimos</p>
             <p><a href="./aviso-legal.html">Aviso legal</a> | <a href="./faq.html">Preguntas frecuentes</a></p>
         </div>
     </footer>
-
-    <!-- Componentes comunes -->
     <div id="cookie-banner" class="cookie-banner hidden">
         <p>Utilizamos cookies para analizar el tráfico y mejorar tu experiencia.</p>
         <div class="cookie-buttons">
@@ -177,105 +153,59 @@
             <a href="./aviso-legal.html" class="btn btn-text">Más información</a>
         </div>
     </div>
-
     <script src="https://npmcdn.com/parse@3.4.0/dist/parse.min.js"></script>
     <script src="./script-panel.js"></script>
     <script>
-        // Mostrar campo de "otros" si se selecciona
-        document.getElementById('work-genre')?.addEventListener('change', function () {
-            const otherField = document.getElementById('other-genre-field');
-            otherField.style.display = this.value === 'otros' ? 'block' : 'none';
-        });
-
-        // Función para saber si un año es bisiesto
-        function isLeapYear(year) {
-            return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        // Generar años
+        for (let i = 2010; i >= 1940; i--) {
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = i;
+            document.getElementById('birth-year').appendChild(opt);
         }
 
-        // Función para obtener días por mes
-        function getDaysInMonth(month, year) {
-            const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-            if (month === 2 && isLeapYear(year)) return 29;
-            return days[month - 1] || 31;
-        }
-
-        // Generar opciones de año (1940–2010)
-        const yearSelect = document.getElementById('birth-year');
-        if (yearSelect) {
-            for (let i = 2010; i >= 1940; i--) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = i;
-                yearSelect.appendChild(option);
-            }
-        }
-
-        // Generar meses (ya están en HTML, así que no los generamos)
-
-        // Rellenar días dinámicamente al cambiar mes o año
+        // Validación de fecha y "otros"
         function updateDays() {
-            const daySelect = document.getElementById('birth-day');
-            const monthSelect = document.getElementById('birth-month');
-            const yearSelect = document.getElementById('birth-year');
-
-            if (!daySelect || !monthSelect || !yearSelect) return;
-
-            const month = parseInt(monthSelect.value);
-            const year = parseInt(yearSelect.value);
-            const currentDay = parseInt(daySelect.value);
-
-            // Limpiar opciones actuales (excepto "Día")
-            daySelect.innerHTML = '<option value="">Día</option>';
-
-            if (!month || !year) return;
-
-            const maxDays = getDaysInMonth(month, year);
-            for (let i = 1; i <= maxDays; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = i;
-                if (i === currentDay) option.selected = true;
-                daySelect.appendChild(option);
-            }
-        }
-
-        // Vincular eventos
-        const monthSelect = document.getElementById('birth-month');
-        const yearSelectEl = document.getElementById('birth-year');
-        if (monthSelect) monthSelect.addEventListener('change', updateDays);
-        if (yearSelectEl) yearSelectEl.addEventListener('change', updateDays);
-
-        // Lógica de envío
-        document.getElementById('activation-survey')?.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Validación de fecha (ya implementada)
-            const day = document.getElementById('birth-day')?.value;
-            const month = document.getElementById('birth-month')?.value;
-            const year = document.getElementById('birth-year')?.value;
-            if (!day || !month || !year) {
-                alert('Completa una fecha válida.');
+            const daySel = document.getElementById('birth-day');
+            const monthSel = document.getElementById('birth-month');
+            const yearSel = document.getElementById('birth-year');
+            if (!daySel || !monthSel || !yearSel) return;
+            const month = parseInt(monthSel.value);
+            const year = parseInt(yearSel.value);
+            if (!month || !year) {
+                daySel.innerHTML = '<option value="">Día</option>';
                 return;
             }
+            const days = new Date(year, month, 0).getDate();
+            daySel.innerHTML = '<option value="">Día</option>';
+            for (let i = 1; i <= days; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = i;
+                daySel.appendChild(opt);
+            }
+        }
+        document.getElementById('birth-month').addEventListener('change', updateDays);
+        document.getElementById('birth-year').addEventListener('change', updateDays);
+        document.getElementById('work-genre').addEventListener('change', (e) => {
+            document.getElementById('other-genre-field').style.display = e.target.value === 'otros' ? 'block' : 'none';
+        });
 
-            // Obtener datos de la obra
-            const obra = {
-                title: document.getElementById('work-title').value.trim(),
-                genre: document.getElementById('work-genre').value === 'otros'
-                    ? document.getElementById('other-genre').value.trim()
-                    : document.getElementById('work-genre').options[document.getElementById('work-genre').selectedIndex].text,
-                link: document.getElementById('work-link').value,
-                synopsis: document.getElementById('work-synopsis').value,
-                timestamp: new Date().toISOString()
-            };
+        // Mostrar ID del usuario
+        document.addEventListener('DOMContentLoaded', () => {
+            const Parse = window.Parse;
+            Parse.initialize("S88jCtz1uP0qT7s0Fe1fp9aJzUB7YmjIuHd5o06p", "XlOB40PLJiE7LXcAL4rww2HM4ksg9u6YbEPGRhJz");
+            Parse.serverURL = 'https://parseapi.back4app.com/';
 
-            // Guardar en localStorage
-            const obras = JSON.parse(localStorage.getItem('adea_obras') || '[]');
-            obras.push(obra);
-            localStorage.setItem('adea_obras', JSON.stringify(obras));
-
-            alert('¡Encuesta enviada! Tu obra aparecerá en el panel.');
-            window.location.href = './panel.html';
+            const user = Parse.User.current();
+            const userIdEl = document.getElementById('survey-user-id');
+            if (user && userIdEl) {
+                userIdEl.textContent = user.get('username') || 'Sin ID';
+            } else {
+                userIdEl.textContent = 'No logueado';
+                alert('Debes iniciar sesión para acceder a la encuesta.');
+                window.location.href = 'login.html';
+            }
         });
     </script>
 </body>

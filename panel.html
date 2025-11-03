@@ -7,26 +7,17 @@
     <title>Panel Privado - AdEA</title>
     <meta name="description"
         content="Panel exclusivo para autores miembros de AdEA. Consulta tus estadísticas, gestiona tus obras y descubre nuevas oportunidades.">
-
-    <!-- Favicon -->
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-
-    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
-
-    <!-- Estilos -->
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style-panel.css">
-
-    <!-- Google Tag Manager -->
+    <!-- GTM + Meta Pixel -->
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WJJXN3SD');</script>
-
-    <!-- Meta Pixel -->
     <script>!function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '870092382345285'); fbq('track', 'PageView');</script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=870092382345285&ev=PageView&noscript=1" /></noscript>
@@ -35,7 +26,6 @@
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJJXN3SD" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
-
     <header class="header">
         <div class="container">
             <a href="./" class="logo-link" aria-label="Ir a la página principal de AdEA">
@@ -50,50 +40,34 @@
             </svg>
         </button>
     </header>
-
     <main class="panel-container">
         <div class="container">
             <section class="panel-header">
-                <h2>Panel privado — AdEA</h2>
-                <p class="anonymous-id">Tu identificador único: <strong>Ɐ-7429</strong></p>
+                <h2>Panel privado - AdEA</h2>
+                <p class="anonymous-id">Tu identificador único: <strong id="user-id">Cargando...</strong></p>
                 <p>Tu obra, tu legado, tu comunidad.</p>
             </section>
-
-            <div class="survey-reminder">
+            <div class="survey-reminder" id="survey-reminder">
                 <p>⚠️ <strong>Importante:</strong> No has completado la encuesta de activación.</p>
                 <a href="./encuesta.html" class="btn btn-primary">Rellenar encuesta</a>
             </div>
-
-            <!-- Informe de impacto -->
             <section class="stats-section">
                 <h3>Informe de impacto</h3>
-
                 <div class="report-filters">
-                    <select id="filter-year" class="filter-select">
-                        <!-- Se llenará con JS -->
-                    </select>
+                    <select id="filter-year" class="filter-select"></select>
                     <select id="filter-month" class="filter-select">
                         <option value="">Todos los meses</option>
-                        <!-- Se llenará con JS -->
                     </select>
                     <select id="filter-quarter" class="filter-select">
                         <option value="">Todos los cuatrimestres</option>
-                        <!-- Se llenará con JS -->
                     </select>
                 </div>
-
-                <div id="report-content">
-                    <!-- Se llenará con JS -->
-                </div>
+                <div id="report-content"></div>
             </section>
-
-            <!-- Obras -->
             <section class="panel-section">
                 <h3>Mis obras</h3>
                 <div id="works-container" class="works-grid"></div>
             </section>
-
-            <!-- Presupuesto -->
             <section class="panel-section">
                 <div class="action-card">
                     <h3>Inversión acumulada</h3>
@@ -101,8 +75,6 @@
                     <p class="note">Este monto se destina exclusivamente a campañas reales en Meta Ads.</p>
                 </div>
             </section>
-
-            <!-- Planes -->
             <section class="panel-section">
                 <h3>Planes disponibles</h3>
                 <div class="plans-grid">
@@ -129,8 +101,6 @@
                         class="btn btn-secondary">Consultar</a>
                 </div>
             </section>
-
-            <!-- Comunidad -->
             <section class="panel-section">
                 <div class="action-card">
                     <h3>Comunidad anónima</h3>
@@ -138,8 +108,6 @@
                     <p class="note">Mantén tu anonimato. Construye legado.</p>
                 </div>
             </section>
-
-            <!-- Soporte -->
             <section class="panel-section">
                 <div class="action-card support-card">
                     <h3>¿Necesitas ayuda?</h3>
@@ -148,21 +116,19 @@
                         class="btn btn-primary">Escribir a soporte</a>
                 </div>
             </section>
-
-            <!-- Perfil -->
+            
             <section class="panel-section">
                 <div class="action-card">
+                    <h3>Tu Perfil</h3>
                     <p>Gestiona tu cuenta y seguridad.</p>
                     <a href="./perfil.html" class="btn btn-secondary">Ir a ajustes</a>
                 </div>
             </section>
-
             <div class="logout-section">
                 <button id="logout-btn" class="btn btn-text">Cerrar sesión</button>
             </div>
         </div>
     </main>
-
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 AdEA — Asociación de Escritores Ɐnónimos</p>
@@ -170,8 +136,6 @@
             <p>La voz del futuro no tiene rostro.</p>
         </div>
     </footer>
-
-    <!-- Componentes comunes -->
     <div id="cookie-banner" class="cookie-banner hidden">
         <p>Utilizamos cookies para analizar el tráfico y mejorar tu experiencia.</p>
         <div class="cookie-buttons">
@@ -179,14 +143,12 @@
             <a href="./aviso-legal.html" class="btn btn-text">Más información</a>
         </div>
     </div>
-
     <a href="https://t.me/adea_oficial" id="floating-telegram" aria-label="Contactar por Telegram">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
     </a>
-
     <script src="https://npmcdn.com/parse@3.4.0/dist/parse.min.js"></script>
     <script src="./script-panel.js"></script>
 </body>

@@ -1,3 +1,5 @@
+
+
 // Scroll suave
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -87,6 +89,9 @@ renderPlans('monthly');
 
 // Cookie consent (frontend-only)
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar Parse (Back4App)
+    Parse.initialize("S88jCtz1uP0qT7s0Fe1fp9aJzUB7YmjIuHd5o06p", "XlOB40PLJiE7LXcAL4rww2HM4ksg9u6YbEPGRhJz");
+    Parse.serverURL = 'https://parseapi.back4app.com/';
     const banner = document.getElementById('cookie-banner');
     const acceptBtn = document.getElementById('accept-cookies');
 
