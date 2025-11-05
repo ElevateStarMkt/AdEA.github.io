@@ -1,4 +1,47 @@
+/**
+ * Muestra un toast personalizado
+ * @param {string} message - Mensaje a mostrar
+ * @param {'success'|'error'|'warning'|'info'} [type='info'] - Tipo de toast
+ * @param {number} [duration=4000] - Duración en ms (0 = permanente hasta cerrar)
+ */
+function showToast(message, type = 'info', duration = 4000) {
+    const container = document.getElementById('toast-container');
+    if (!container) {
+        console.warn('Toast container not found. Add <div id="toast-container"></div> before </body>');
+        return;
+    }
 
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+        <span>${message}</span>
+        <button class="close-btn" aria-label="Cerrar">&times;</button>
+    `;
+
+    container.appendChild(toast);
+
+    // Mostrar animación
+    setTimeout(() => toast.classList.add('show'), 10);
+
+    // Cerrar al hacer clic en ×
+    const closeBtn = toast.querySelector('.close-btn');
+    closeBtn?.addEventListener('click', () => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    });
+
+    // Cerrar automáticamente
+    if (duration > 0) {
+        setTimeout(() => {
+            if (toast.classList.contains('show')) {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) toast.remove();
+                }, 300);
+            }
+        }, duration);
+    }
+}
 
 // Scroll suave
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -41,9 +84,7 @@ function renderPlans(cycle = 'monthly') {
         const annualPrice = monthlyPrice * 11; // 11 meses = 12 con 1 gratis
 
         const price = cycle === 'monthly' ? monthlyPrice : annualPrice;
-        const investment = cycle === 'monthly'
-            ? (monthlyPrice * 0.75)
-            : (annualPrice / 12 * 0.75);
+        const investment = monthlyPrice * 0.75; // ✅ SIEMPRE el 75% del precio mensual base
 
         // URLs de SubLaunch
         const monthlyUrl = `https://sublaunch.com/adeaoficial/checkout?price=${plan.monthlyId}`;

@@ -1,0 +1,254 @@
+<!-- influencers.html -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de creadores - AdEA</title>
+    <meta name="description" content="Panel exclusivo para bookstagramers y booktokers colaboradores de AdEA.">
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style-panel.css">
+    <script src="https://npmcdn.com/parse@3.4.0/dist/parse.min.js"></script>
+    <script>
+        Parse.initialize("S88jCtz1uP0qT7s0Fe1fp9aJzUB7YmjIuHd5o06p", "XlOB40PLJiE7LXcAL4rww2HM4ksg9u6YbEPGRhJz");
+        Parse.serverURL = 'https://parseapi.back4app.com/';
+    </script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="./" class="logo-link">
+                <img src="logo.png" alt="AdEA" class="logo">
+            </a>
+            <p class="tagline">La voz del futuro no tiene rostro.</p>
+        </div>
+        <button id="theme-toggle" class="theme-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </header>
+
+    <main class="panel-container">
+        <div class="container">
+            <section class="panel-header">
+                <h2>Panel de creadores de contenido</h2>
+                <p class="anonymous-id">Tu identificador: <strong id="user-id">Cargando...</strong></p>
+                <p>Gracias por dar visibilidad a las voces anónimas.</p>
+            </section>
+
+            <section class="panel-section">
+                <div class="action-card">
+                    <h3>Próximamente</h3>
+                    <p>Acceso a obras anónimas para reseña, estadísticas de impacto y herramientas de colaboración.</p>
+                    <p class="note">Mantén tu estilo. Protege el anonimato.</p>
+                </div>
+            </section>
+
+            <!-- Obras recomendadas -->
+            <section class="panel-section" id="recomendadas-section" style="display:none;">
+                <h3>Obras anónimas para reseña</h3>
+                <p>Basado en tus géneros favoritos.</p>
+                <div id="obras-grid" class="works-grid"></div>
+                <!-- Modal de obra -->
+                <div id="obra-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <button id="close-modal" class="btn btn-text"
+                            style="margin-left: auto; margin-bottom: 1rem;">Cerrar</button>
+                        <h4>Obra anónima</h4>
+                        <!-- Dentro del modal -->
+                        <p><strong>Géneros:</strong> <span id="modal-generos"></span></p>
+                        <p><strong>Sinopsis:</strong></p>
+                        <p id="modal-sinopsis"></p>
+                        <div id="modal-accion-container"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mini-form modal (flotante) -->
+            <section class="panel-section">
+                <div class="action-card support-card">
+                    <h3>¿Necesitas ayuda?</h3>
+                    <p>Contáctanos por Telegram.</p>
+                    <a href="https://t.me/adea_oficial?text=Hola, soy creador y tengo una duda"
+                        class="btn btn-primary">Escribir a soporte</a>
+                </div>
+            </section>
+
+            <div class="logout-section">
+                <button id="logout-btn" class="btn btn-text">Cerrar sesión</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 AdEA — Asociación de Escritores Ɐnónimos</p>
+            <p><a href="./aviso-legal.html">Aviso legal</a> | <a href="./faq.html">Preguntas frecuentes</a></p>
+            <p>La voz del futuro no tiene rostro.</p>
+        </div>
+    </footer>
+
+    <script>
+        Parse.initialize("S88jCtz1uP0qT7s0Fe1fp9aJzUB7YmjIuHd5o06p", "XlOB40PLJiE7LXcAL4rww2HM4ksg9u6YbEPGRhJz");
+        Parse.serverURL = 'https://parseapi.back4app.com/';
+
+        const currentUser = Parse.User.current();
+        if (!currentUser) {
+            window.location.href = 'login-influ.html';
+        }
+
+        // === Incrementar contador de forma segura ===
+        async function incrementarContador(obra, campo) {
+            try {
+                // Usamos increment para evitar conflictos
+                const Obra = Parse.Object.extend("Obras");
+                const query = new Parse.Query(Obra);
+                const obraFresca = await query.get(obra.id);
+                obraFresca.increment(campo, 1);
+                await obraFresca.save();
+            } catch (error) {
+                console.warn("No se pudo actualizar contador:", error);
+                // No bloqueamos la UX si falla
+            }
+        }
+
+        window.incrementarContadorPorId = async (obraId, campo) => {
+            const Obra = Parse.Object.extend("Obras");
+            const obra = new Obra();
+            obra.id = obraId;
+            await incrementarContador(obra, campo);
+        };
+
+        // === MODAL ===
+        function mostrarModal(obra) {
+            // ✅ Registrar clic en "Ver sinopsis"
+            incrementarContador(obra, "clicksSinopsis");
+
+            const sinopsis = obra.get('sinopsis') || 'Sin sinopsis disponible.';
+            const generos = obra.get('genero')?.join(', ') || 'Sin género';
+            const idObra = obra.id;
+            const influencerPuede = obra.get('influencerpuede') === true;
+
+            document.getElementById('modal-generos').textContent = generos;
+            document.getElementById('modal-sinopsis').textContent = sinopsis;
+
+            const btnAccion = document.getElementById('modal-accion-btn');
+            const accionContainer = document.getElementById('modal-accion-container');
+
+            if (influencerPuede) {
+                accionContainer.innerHTML = `
+        <a href="https://t.me/adea_oficial?text=${encodeURIComponent(`Hola, solicito la obra anónima ${idObra} para reseña.`)}"
+           class="btn btn-primary"
+           onclick="incrementarContadorPorId('${obra.id}', 'clicksAccion')">
+            Solicitar colaboración gratuita
+        </a>
+    `;
+            } else {
+                accionContainer.innerHTML = `
+        <p class="note" style="margin-top: 1rem;">No se aceptan más colaboraciones.</p>
+        <a href="https://t.me/adea_oficial?text=${encodeURIComponent(`Hola, me gustaría tener el enlace del libro ${idObra} para comprarlo.`)}"
+           class="btn btn-secondary"
+           onclick="incrementarContadorPorId('${obra.id}', 'clicksAccion')">
+            Comprar libro
+        </a>
+    `;
+            }
+
+            document.getElementById('obra-modal').classList.remove('hidden');
+        }
+
+        // === CARGAR OBRAS ===
+        async function cargarTodasObras() {
+            try {
+                const Obra = Parse.Object.extend("Obras");
+                const query = new Parse.Query(Obra);
+                query.limit(100);
+                query.ascending("createdAt");
+                const obras = await query.find();
+
+                if (obras.length === 0) return;
+
+                const grid = document.getElementById('obras-grid');
+                const section = document.getElementById('recomendadas-section');
+                section.style.display = 'block';
+
+                grid.innerHTML = obras.map(obra => {
+                    const generos = obra.get('genero')?.join(', ') || 'Sin género';
+                    return `
+                    <div class="work-card">
+                        <p><strong>Género(s):</strong> ${generos}</p>
+                        <button class="btn btn-text" onclick="window.__mostrarModal('${obra.id}')">Ver sinopsis</button>
+                    </div>
+                `;
+                }).join('');
+
+                window.__mostrarModal = (obraId) => {
+                    const obra = obras.find(o => o.id === obraId);
+                    if (obra) mostrarModal(obra);
+                };
+
+            } catch (error) {
+                console.error("Error al cargar obras:", error);
+            }
+        }
+
+        // === EVENTOS ===
+        document.getElementById('close-modal')?.addEventListener('click', () => {
+            document.getElementById('obra-modal').classList.add('hidden');
+        });
+
+        // Enviar contador al hacer clic en el botón de acción
+        document.getElementById('modal-accion-btn')?.addEventListener('click', (e) => {
+            const obraId = window.__obraIdTemporal;
+            if (obraId) {
+                const Obra = Parse.Object.extend("Obras");
+                const obra = new Obra();
+                obra.id = obraId;
+                incrementarContador(obra, "clicksAccion");
+            }
+        });
+
+        // Guardar ID temporal para el contador de acción
+        window.__mostrarModal = (obraId) => {
+            window.__obraIdTemporal = obraId;
+            const Obra = Parse.Object.extend("Obras");
+            const query = new Parse.Query(Obra);
+            query.get(obraId).then(obra => mostrarModal(obra));
+        };
+
+        // === INICIO ===
+        document.getElementById('user-id').textContent = currentUser.get('username') || 'Sin ID';
+
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            await Parse.User.logOut();
+            window.location.href = 'login-influ.html';
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            const htmlEl = document.documentElement;
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'paper') htmlEl.setAttribute('data-theme', 'paper');
+            themeToggle.addEventListener('click', () => {
+                const t = htmlEl.getAttribute('data-theme') === 'dark' ? 'paper' : 'dark';
+                htmlEl.setAttribute('data-theme', t);
+                localStorage.setItem('theme', t);
+            });
+        }
+
+        cargarTodasObras();
+    </script>
+</body>
+
+</html>

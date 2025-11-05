@@ -4,36 +4,28 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iniciar sesión - Panel AdEA</title>
-    <meta name="description"
-        content="Área privada para autores miembros de AdEA. Accede a tus estadísticas mensuales y gestiona tu perfil.">
+    <title>Iniciar sesión - Creadores AdEA</title>
+    <meta name="description" content="Área privada para bookstagramers y booktokers colaboradores de AdEA.">
 
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-
-    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
 
-    <!-- Estilos principales + panel -->
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style-panel.css">
 
-    <!-- Google Tag Manager -->
+    <!-- GTM + Meta Pixel -->
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WJJXN3SD');</script>
-
-    <!-- Meta Pixel -->
     <script>!function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '870092382345285'); fbq('track', 'PageView');</script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=870092382345285&ev=PageView&noscript=1" /></noscript>
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJJXN3SD" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
 
@@ -47,14 +39,17 @@
 
         <div class="header-actions">
             <!-- Botón Área de creador de contenido -->
-            <a href="./login-influ.html" class="writer-area-link"
-                aria-label="Acceder al área de bookstagramers y booktokers">
+            
+            <!-- Botón Área de escritor (igual que estaba) -->
+            <a href="./login.html" class="writer-area-link" aria-label="Acceder al área privada de escritor">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2">
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                <span>Área de creador</span>
+                <span>Área de escritor</span>
             </a>
 
             <!-- Botón modo oscuro -->
@@ -69,8 +64,8 @@
 
     <main class="login-container">
         <div class="login-card">
-            <h2>Acceso al panel privado</h2>
-            <p>Introduce las credenciales que te facilitamos al unirte a AdEA.</p>
+            <h2>Acceso para creadores de contenido</h2>
+            <p>Bookstagramers, booktokers y reseñistas: inicia sesión con tus credenciales AdEA.</p>
 
             <form id="login-form">
                 <div class="form-group">
@@ -85,8 +80,16 @@
             </form>
 
             <div id="login-error" class="login-error hidden"></div>
+
+            <div class="login-footer-note"
+                style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: var(--text-secondary);">
+                <p>¿Aún no formas parte de AdEA como creador?</p>
+                <a href="./encuesta-influ.html" id="btn-encuesta-influ" class="btn btn-text"
+                    style="display: inline-block; margin-top: 0.5rem;">
+                    Rellenar encuesta de incorporación
+                </a>
+            </div>
         </div>
-        <div id="toast-container"></div>
     </main>
 
     <footer class="footer">
@@ -97,7 +100,6 @@
         </div>
     </footer>
 
-    <!-- Banner de cookies -->
     <div id="cookie-banner" class="cookie-banner hidden">
         <p>Utilizamos cookies para analizar el tráfico y mejorar tu experiencia.</p>
         <div class="cookie-buttons">
@@ -105,26 +107,19 @@
             <a href="./aviso-legal.html" class="btn btn-text">Más información</a>
         </div>
     </div>
-    
+    <div id="toast-container"></div>
 
-    <!-- Botón flotante de Telegram -->
     <a href="https://t.me/adea_oficial" id="floating-telegram" aria-label="Contactar por Telegram">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
     </a>
-    <!-- Parse SDK + script del panel -->
-    <script src="https://npmcdn.com/parse@3.4.0/dist/parse.min.js"></script>
 
+    <script src="https://npmcdn.com/parse@3.4.0/dist/parse.min.js"></script>
     <script src="./script-panel.js"></script>
     <script>
-
-        // === INICIALIZAR PARSE ===
-        Parse.initialize("S88jCtz1uP0qT7s0Fe1fp9aJzUB7YmjIuHd5o06p", "XlOB40PLJiE7LXcAL4rww2HM4ksg9u6YbEPGRhJz");
-        Parse.serverURL = 'https://parseapi.back4app.com/';
-
-        // === FUNCIONES AUXILIARES (definidas al inicio del script) ===
+        // === FUNCIONES AUXILIARES ===
         function updateThemeIcon(theme) {
             const button = document.getElementById('theme-toggle');
             if (!button) return;
@@ -136,11 +131,12 @@
                 icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
             }
         }
-
-        
+        // === INICIALIZAR PARSE ===
+        Parse.initialize("S88jCtz1uP0qT7s0Fe1fp9aJzUB7YmjIuHd5o06p", "XlOB40PLJiE7LXcAL4rww2HM4ksg9u6YbEPGRhJz");
+        Parse.serverURL = 'https://parseapi.back4app.com/';
 
         document.addEventListener('DOMContentLoaded', () => {
-            // === COOKIE BANNER ===
+            // Cookie banner
             const banner = document.getElementById('cookie-banner');
             const acceptBtn = document.getElementById('accept-cookies');
             if (banner && acceptBtn) {
@@ -153,25 +149,25 @@
                 });
             }
 
-            // === TEMA OSCURO / PAPEL ===
+            // Tema
             const themeToggle = document.getElementById('theme-toggle');
             if (themeToggle) {
                 const htmlEl = document.documentElement;
                 const savedTheme = localStorage.getItem('theme') || 'dark';
                 if (savedTheme === 'paper') {
                     htmlEl.setAttribute('data-theme', 'paper');
-                    updateThemeIcon('paper'); // ✅ Ahora la función ya existe
+                    updateThemeIcon('paper');
                 }
                 themeToggle.addEventListener('click', () => {
                     const current = htmlEl.getAttribute('data-theme') || 'dark';
                     const newTheme = current === 'dark' ? 'paper' : 'dark';
                     htmlEl.setAttribute('data-theme', newTheme);
                     localStorage.setItem('theme', newTheme);
-                    updateThemeIcon(newTheme); // ✅ Funciona correctamente
+                    updateThemeIcon(newTheme);
                 });
             }
 
-            // === LOGIN ===
+            // LOGIN
             const loginForm = document.getElementById('login-form');
             if (loginForm) {
                 loginForm.addEventListener('submit', async (e) => {
@@ -183,7 +179,7 @@
                     try {
                         const user = await Parse.User.logIn(username, password);
                         if (user) {
-                            window.location.href = 'panel.html';
+                            window.location.href = 'influencers.html';
                         }
                     } catch (error) {
                         console.error('Login error:', error);
@@ -193,7 +189,28 @@
                     }
                 });
             }
+
+            // Contador: clic en enlace a encuesta
+            const btnEncuesta = document.getElementById('btn-encuesta-influ');
+            if (btnEncuesta) {
+                btnEncuesta.addEventListener('click', () => {
+                    incrementarContadorGlobal('loginInfluEncuestaClick');
+                });
+            }
         });
+
+        // === CONTADORES GLOBALES (CORREGIDO) ===
+        async function incrementarContadorGlobal(campo) {
+            try {
+                const Contador = Parse.Object.extend("Contadores");
+                // ✅ Usa el objectId fijo que proporcionaste
+                const obj = Contador.createWithoutData("9tNR3Y8JDL");
+                obj.increment(campo, 1);
+                await obj.save();
+            } catch (error) {
+                console.warn("No se pudo registrar el contador:", error);
+            }
+        }
     </script>
 </body>
 

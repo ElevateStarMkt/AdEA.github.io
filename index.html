@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AdEA — Promoción literaria anónima para escritores</title>
+    <title>AdEA - Promoción literaria anónima para escritores</title>
     <meta name="description"
         content="AdEA es la primera asociación que promueve obras, no nombres. Campañas en Meta Ads, Telegram e Instagram. Sin permanencia. 75% de tu aporte va directo a publicidad.">
 
@@ -15,9 +15,9 @@
     <!-- Preconexión a fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WJJXN3SD');</script>
@@ -43,7 +43,16 @@
         </div>
 
         <div class="header-actions">
-
+            <!-- Botón Área de creador de contenido -->
+            <a href="./login-influ.html" class="writer-area-link"
+                aria-label="Acceder al área de bookstagramers y booktokers">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                <span>Área de creador</span>
+            </a>
             <!-- Botón Área de escritor (igual que estaba) -->
             <a href="./login.html" class="writer-area-link" aria-label="Acceder al área privada de escritor">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -227,14 +236,14 @@
         <div class="container">
             <h2>¿Listo para dar voz a tu historia?</h2>
             <p>Únete a una comunidad que valora el contenido más que el nombre.</p>
-            <a href="https://t.me/adea_oficial" class="btn btn-primary">Escríbenos por Telegram</a>
+            <a href="https://t.me/adea_oficial" class="btn btn-primary">Escríbenos por Telegram</a><br><br>
             <a href="https://www.instagram.com/direct/t/17846277936442201/" class="btn btn-primary">Escríbenos por
                 Instagram</a>
         </div>
     </section>
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 AdEA — Asociación de Escritores Ɐnónimos</p>
+            <p>&copy; 2025 AdEA - Asociación de Escritores Ɐnónimos</p>
             <p><a href="./aviso-legal.html" style="color:#b0a595; text-decoration:underline;">Aviso legal</a> |
                 <a href="./faq.html" style="color:#b0a595; text-decoration:underline;">Preguntas frecuentes</a>
             </p>
@@ -257,6 +266,8 @@
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
     </a>
+
+    <div id="toast-container"></div>
     <script src="https://npmcdn.com/parse@3.4.0/dist/parse.min.js"></script>
     <script src="./script.js"></script>
 </body>

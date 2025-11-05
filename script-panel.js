@@ -3,7 +3,54 @@ const Parse = window.Parse;
 Parse.initialize("S88jCtz1uP0qT7s0Fe1fp9aJzUB7YmjIuHd5o06p", "XlOB40PLJiE7LXcAL4rww2HM4ksg9u6YbEPGRhJz");
 Parse.serverURL = 'https://parseapi.back4app.com/';
 
+/**
+ * Muestra un toast personalizado
+ * @param {string} message - Mensaje a mostrar
+ * @param {'success'|'error'|'warning'|'info'} [type='info'] - Tipo de toast
+ * @param {number} [duration=4000] - Duración en ms (0 = permanente hasta cerrar)
+ */
+function showToast(message, type = 'info', duration = 4000) {
+    const container = document.getElementById('toast-container');
+    if (!container) {
+        console.warn('Toast container not found. Add <div id="toast-container"></div> before </body>');
+        return;
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+        <span>${message}</span>
+        <button class="close-btn" aria-label="Cerrar">&times;</button>
+    `;
+
+    container.appendChild(toast);
+
+    // Mostrar animación
+    setTimeout(() => toast.classList.add('show'), 10);
+
+    // Cerrar al hacer clic en ×
+    const closeBtn = toast.querySelector('.close-btn');
+    closeBtn?.addEventListener('click', () => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    });
+
+    // Cerrar automáticamente
+    if (duration > 0) {
+        setTimeout(() => {
+            if (toast.classList.contains('show')) {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) toast.remove();
+                }, 300);
+            }
+        }, duration);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+
+
 
     // === 0. PROTEGER PANEL Y PERFIL ===
     if (window.location.pathname.endsWith('panel.html') || window.location.pathname.endsWith('perfil.html')) {
@@ -73,11 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 user.set("encuesta", true);
                 await user.save();
 
-                alert('✅ ¡Encuesta enviada! Tu obra aparecerá en el panel.');
+                showToast('✅ ¡Encuesta enviada! Tu obra aparecerá en el panel.');
                 window.location.href = 'panel.html';
             } catch (error) {
                 console.error('Error al enviar encuesta:', error);
-                alert('❌ Error al guardar. Verifica tu conexión y permisos.');
+                showToast('❌ Error al guardar. Verifica tu conexión y permisos.');
             }
         });
     }
@@ -112,19 +159,31 @@ document.addEventListener('DOMContentLoaded', () => {
         })();
     }
 
-    // === 10. CARGAR INVERSIÓN ACUMULADA Y PLAN ACTUAL ===
+    // === 10. CARGAR INVERSIÓN ACUMULADA, PLAN ACTUAL Y ESCALADO ===
     if (currentUser && (document.getElementById('investment-text') || document.querySelector('.plans-grid'))) {
         (async () => {
             try {
-                // 1. Obtener plan del usuario
-                let userPlan = (currentUser.get('plan') || 'Básico').trim();
+                // 1. Obtener plan y tipo de suscripción
+                let rawPlan = currentUser.get('plan') || 'Básico';
+                let tipoSuscripcion = currentUser.get('mensualanual') || 'mensual'; // 'mensual' o 'anual'
 
-                // Corregir posibles variantes comunes
-                if (userPlan.toLowerCase().includes('basico') || userPlan === 'Basico') {
-                    userPlan = 'Básico';
-                }
+                // Normalizar plan
+                const normalizePlan = (plan) => {
+                    if (!plan) return 'Básico';
+                    return plan
+                        .trim()
+                        .normalize("NFD")
+                        .replace(/[\u0300-\u036f]/g, "")
+                        .replace(/basico/i, 'Básico')
+                        .replace(/prime/i, 'Prime')
+                        .replace(/supremo/i, 'Supremo')
+                        .replace(/legado/i, 'Legado');
+                };
 
-                // 2. Obtener fecha de la primera encuesta
+                const userPlan = normalizePlan(rawPlan);
+                const esAnual = tipoSuscripcion.toLowerCase() === 'anual';
+
+                // 2. Fechas y cálculo de inversión
                 const Encuesta = Parse.Object.extend("Encuesta");
                 const query = new Parse.Query(Encuesta);
                 query.equalTo("autor", currentUser);
@@ -133,32 +192,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let fechaInicio = null;
                 let mesesTranscurridos = 0;
-                let inversionTotal = 0;
 
                 if (primeraEncuesta) {
                     fechaInicio = primeraEncuesta.get('fechaEnvio');
                     if (fechaInicio) {
                         const hoy = new Date();
                         const inicio = new Date(fechaInicio);
-                        // Calcular meses completos
                         mesesTranscurridos = (hoy.getFullYear() - inicio.getFullYear()) * 12 + (hoy.getMonth() - inicio.getMonth());
                         if (hoy.getDate() < inicio.getDate()) mesesTranscurridos--;
                         mesesTranscurridos = Math.max(0, mesesTranscurridos);
                     }
                 }
 
-                // 3. Calcular inversión (75% del plan)
-                const planes = {
+                // 3. Definir planes (mensual)
+                const planesMensual = {
                     "Básico": 40,
                     "Prime": 90,
                     "Supremo": 150,
                     "Legado": 250
                 };
-                const mensualidad = planes[userPlan] || 40;
-                const inversionMensual = mensualidad * 0.75;
-                inversionTotal = inversionMensual * (mesesTranscurridos + 1); // +1 porque el primer mes cuenta
+                const ordenPlanes = ["Básico", "Prime", "Supremo", "Legado"];
 
-                // 4. Actualizar inversión acumulada
+                const mensualidad = planesMensual[userPlan] || 40;
+                const inversionMensual = mensualidad * 0.75;
+                const inversionTotal = inversionMensual * (mesesTranscurridos + 1);
+
+                // 4. Mostrar inversión acumulada
                 const investmentText = document.getElementById('investment-text');
                 if (investmentText) {
                     let fechaFormateada = "enero de 2025";
@@ -175,50 +234,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 }
 
-                // Normaliza el plan del usuario: quita tildes, espacios y pasa a mayúscula inicial
-                function normalizePlan(plan) {
-                    if (!plan) return 'Básico';
-                    return plan
-                        .trim()
-                        .normalize("NFD")
-                        .replace(/[\u0300-\u036f]/g, "") // elimina tildes
-                        .replace(/basico/i, 'Básico')
-                        .replace(/prime/i, 'Prime')
-                        .replace(/supremo/i, 'Supremo')
-                        .replace(/legado/i, 'Legado');
-                }
-
-                console.log('Plan crudo del usuario:', currentUser.get('plan'));
-                console.log('Plan normalizado:', userPlan);
-
-                // 5. Actualizar planes disponibles
+                // 5. Mostrar planes con precios correctos
                 const planesGrid = document.querySelector('.plans-grid');
                 if (planesGrid) {
-                    planesGrid.innerHTML = `
-                    <div class="plan-item ${userPlan === 'Básico' ? 'current' : 'inactive'}">
-                        <h4>Básico</h4>
-                        <p>40 €/mes</p>
-                        ${userPlan === 'Básico' ? '<span class="current-badge">Tu plan actual</span>' : ''}
-                    </div>
-                    <div class="plan-item ${userPlan === 'Prime' ? 'current' : 'inactive'}">
-                        <h4>Prime</h4>
-                        <p>90 €/mes</p>
-                        ${userPlan === 'Prime' ? '<span class="current-badge">Tu plan actual</span>' : ''}
-                    </div>
-                    <div class="plan-item ${userPlan === 'Supremo' ? 'current' : 'inactive'}">
-                        <h4>Supremo</h4>
-                        <p>150 €/mes</p>
-                        ${userPlan === 'Supremo' ? '<span class="current-badge">Tu plan actual</span>' : ''}
-                    </div>
-                    <div class="plan-item ${userPlan === 'Legado' ? 'current' : 'inactive'}">
-                        <h4>Legado</h4>
-                        <p>250 €/mes</p>
-                        ${userPlan === 'Legado' ? '<span class="current-badge">Tu plan actual</span>' : ''}
-                    </div>
-                `;
+                    planesGrid.innerHTML = ordenPlanes.map(plan => {
+                        const precioBase = planesMensual[plan] || 0;
+                        const precio = esAnual ? precioBase * 11 : precioBase;
+                        const unidad = esAnual ? 'año' : 'mes';
+                        const esActual = userPlan === plan;
+
+                        return `
+                        <div class="plan-item ${esActual ? 'current' : 'inactive'}">
+                            <h4>${plan}</h4>
+                            <p>${precio} €/${unidad}</p>
+                            ${esActual ? '<span class="current-badge">Tu plan actual</span>' : ''}
+                        </div>
+                    `;
+                    }).join('');
                 }
+
+                // 6. Sugerencia de escalado
+                const idxActual = ordenPlanes.indexOf(userPlan);
+                const siguientePlan = idxActual < ordenPlanes.length - 1 ? ordenPlanes[idxActual + 1] : null;
+                const upgradeSuggestion = document.querySelector('.upgrade-suggestion');
+
+                if (upgradeSuggestion && siguientePlan) {
+                    const precioSiguiente = esAnual ? planesMensual[siguientePlan] * 11 : planesMensual[siguientePlan];
+                    const unidad = esAnual ? 'año' : 'mes';
+                    upgradeSuggestion.innerHTML = `
+                    <p>¿Quieres escalar? El plan <strong>${siguientePlan}</strong> ofrece segmentación avanzada.</p>
+                    <a href="https://t.me/adea_oficial?text=Hola, me interesa escalar a ${siguientePlan}"
+                       class="btn btn-secondary">Consultar</a>
+                `;
+                } else if (upgradeSuggestion) {
+                    // Usuario en plan "Legado" → mensaje personalizado
+                    upgradeSuggestion.innerHTML = `
+        <p>¿Quieres aumentar la inversión? Contacta con nosotros y personaliza tu plan.</p>
+        <a href="https://t.me/adea_oficial?text=Hola, quiero personalizar mi plan Legado"
+           class="btn btn-secondary">Consultar</a>
+    `;
+                }
+
             } catch (error) {
-                console.error('Error al cargar inversión o plan:', error);
+                console.error('Error al cargar inversión, plan o sugerencia de escalado:', error);
             }
         })();
     }
@@ -254,6 +312,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+
     // === 6. CERRAR SESIÓN ===
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
@@ -283,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 await Parse.User.logIn(user.get('username'), currentPass);
                 user.setPassword(newPass);
                 await user.save();
-                alert('✅ Contraseña actualizada correctamente.');
+                showToast('✅ Contraseña actualizada correctamente.');
                 window.location.href = 'panel.html';
             } catch (error) {
                 console.error('Error al cambiar contraseña:', error);

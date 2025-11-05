@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encuesta para creadores - AdEA</title>
+    <meta name="description" content="Completa esta encuesta para unirte como bookstagramer o booktoker en AdEA.">
+    <link rel="icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style-panel.css">
+    <!-- GTM + Meta Pixel -->
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WJJXN3SD');</script>
+    <script>!function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '870092382345285'); fbq('track', 'PageView');</script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=870092382345285&ev=PageView&noscript=1" /></noscript>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WJJXN3SD" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <header class="header">
+        <div class="container">
+            <a href="./" class="logo-link" aria-label="Ir a la página principal de AdEA">
+                <img src="./logo.png" alt="AdEA - Asociación de Escritores Ɐnónimos" class="logo">
+            </a>
+            <p class="tagline">La voz del futuro no tiene rostro.</p>
+        </div>
+        <button id="theme-toggle" class="theme-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </header>
+
+    <main class="panel-container">
+        <div class="container">
+            <section class="panel-header">
+                <h2>Encuesta para creadores de contenido</h2>
+                <p>Todos los campos son obligatorios. Gracias por tu interés en colaborar con AdEA.</p>
+            </section>
+
+            <form id="influencer-survey" class="survey-form">
+                <!-- Datos personales -->
+                <h3>Datos personales</h3>
+                <div class="form-group">
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellidos">Apellidos *</label>
+                    <input type="text" id="apellidos" name="apellidos" required>
+                </div>
+                <div class="form-group">
+                    <label for="telegram">@ de Telegram *</label>
+                    <input type="text" id="telegram" name="telegram" placeholder="@usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="direccion">Dirección completa (Calle, CP, Localidad, País) *</label>
+                    <textarea id="direccion" name="direccion" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono *</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="nacimiento">Fecha de nacimiento *</label>
+                    <input type="date" id="nacimiento" name="nacimiento" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo electrónico *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <!-- Redes sociales -->
+                <h3>Redes sociales</h3>
+                <div class="form-group">
+                    <label for="instagram">URL de Instagram *</label>
+                    <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/usuario"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="tiktok">URL de TikTok *</label>
+                    <input type="url" id="tiktok" name="tiktok" placeholder="https://tiktok.com/@usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="otras-rrss">Otras redes sociales (Goodreads, X, Facebook, etc.)</label>
+                    <textarea id="otras-rrss" name="otras-rrss" rows="2"></textarea>
+                </div>
+
+                <!-- Preferencias literarias -->
+                <h3>Preferencias literarias</h3>
+                <div class="form-group">
+                    <label>Género(s) favorito(s) *</label>
+                    <div class="checkbox-group" id="generos-favoritos">
+                        <label><input type="checkbox" name="genero" value="Fantasía"> Fantasía</label>
+                        <label><input type="checkbox" name="genero" value="Erótica"> Erótica</label>
+                        <label><input type="checkbox" name="genero" value="Romántica"> Romántica</label>
+                        <label><input type="checkbox" name="genero" value="Romantasy"> Romantasy</label>
+                        <label><input type="checkbox" name="genero" value="Sobrenatural"> Sobrenatural</label>
+                        <label><input type="checkbox" name="genero" value="Thriller"> Thriller</label>
+                        <label><input type="checkbox" name="genero" value="Terror"> Terror</label>
+                        <label><input type="checkbox" name="genero" value="Misterio"> Misterio</label>
+                        <label><input type="checkbox" name="genero" value="Poesía"> Poesía</label>
+                        <label>
+                            <input type="checkbox" name="genero" value="Otros" id="genero-otros-check">
+                            Otros
+                        </label>
+                    </div>
+                    <div id="genero-otros-field" class="form-group" style="display:none;">
+                        <input type="text" id="genero-otros-text" name="genero-otros-text" placeholder="Especifica...">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="publi-libros">¿Autorizas a recibir publicidad de libros? *</label>
+                    <select id="publi-libros" name="publi-libros" required>
+                        <option value="">Selecciona</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                        <option value="Solo relacionados con mis gustos">Solo relacionados con mis gustos</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="recibir-libros">¿Autorizas a recibir libros físicos en tu domicilio? *</label>
+                    <select id="recibir-libros" name="recibir-libros" required>
+                        <option value="">Selecciona</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                        <option value="Solo relacionados con mis gustos">Solo relacionados con mis gustos</option>
+                    </select>
+                </div>
+
+                <!-- Suscripción futura -->
+                <h3>Próximamente: Suscripción de libros mensuales</h3>
+                <p>Recibirás 1 libro al mes (o semana) a tu elección entre 3 opciones, sin revelar el nombre del autor,
+                    solo sinopsis.</p>
+                <div class="form-group">
+                    <label for="suscripcion-futura">¿Te interesaría esta suscripción? *</label>
+                    <select id="suscripcion-futura" name="suscripcion-futura" required>
+                        <option value="">Selecciona</option>
+                        <option value="Me parece una buena idea, pero no estoy dentro">Me parece una buena idea, pero no
+                            estoy dentro</option>
+                        <option value="Me parece una buena idea, estoy dentro">Me parece una buena idea, estoy dentro
+                        </option>
+                        <option value="No sé / No respondo">No sé / No respondo</option>
+                        <option value="Depende del coste">Depende del coste</option>
+                        <option value="No me parece una buena idea">No me parece una buena idea</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div id="suscripcion-otro-field" class="form-group" style="display:none;">
+                    <textarea id="suscripcion-otro-text" name="suscripcion-otro-text"
+                        placeholder="Comenta..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enviar encuesta</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 AdEA — Asociación de Escritores Ɐnónimos</p>
+            <p><a href="./aviso-legal.html">Aviso legal</a> | <a href="./faq.html">Preguntas frecuentes</a></p>
+            <p>La voz del futuro no tiene rostro.</p>
+        </div>
+    </footer>
+    <div id="toast-container"></div>
+
+    <script src="https://npmcdn.com/parse@3.4.0/dist/parse.min.js"></script>
+    <script src="./script-influ.js"></script>
+</body>
+
+</html>
