@@ -142,12 +142,23 @@ document.addEventListener('DOMContentLoaded', () => {
             influ.set("tiktok", document.getElementById('tiktok').value.trim());
             influ.set("otrasRRSS", document.getElementById('otras-rrss').value.trim() || '');
 
-            let generosFavoritos = generos.map(cb => cb.value);
+            let generosSeleccionados = generos.map(cb => cb.value);
+            let otrosGenerosArray = []; // Nuevo array para "Otros"
+
             if (otrosCheck?.checked) {
-                const otro = document.getElementById('genero-otros-text')?.value.trim();
-                if (otro) generosFavoritos.push(otro);
+                const textoOtros = document.getElementById('genero-otros-text')?.value.trim();
+                if (textoOtros) {
+                    // Opción 1: Guardar solo lo que escriben en "Otros" en la nueva columna
+                    otrosGenerosArray.push(textoOtros);
+
+                    // Opción 2 (alternativa): Si también quieres que "Otros" aparezca en la lista general
+                    // generosSeleccionados.push(textoOtros);
+                }
             }
-            influ.set("generosFavoritos", generosFavoritos);
+
+            // Guardar las dos listas por separado
+            influ.set("generosFavoritos", generosSeleccionados); // Por ejemplo: ["Fantasía", "Romántica"]
+            influ.set("otrosGeneros", otrosGenerosArray);        // Por ejemplo: ["Ciencia Ficción", "Biografía"]
 
             influ.set("permitePublicidad", document.getElementById('publi-libros').value);
             influ.set("permiteEnvioLibros", document.getElementById('recibir-libros').value);
