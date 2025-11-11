@@ -109,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    Parse.User.logOut().then(() => {
+        console.log("Sesión Parse limpiada");
+    });
+
     // === CARGAR LIBROS ===
     async function loadBooks() {
         try {
