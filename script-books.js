@@ -2,7 +2,7 @@
 const Parse = window.Parse;
 Parse.initialize("S88jCtz1uP0qT7s0Fe1fp9aJzUB7YmjIuHd5o06p", "XlOB40PLJiE7LXcAL4rww2HM4ksg9u6YbEPGRhJz");
 Parse.serverURL = 'https://parseapi.back4app.com/';
-
+Parse.User.enableUnsafeCurrentUser();
 // === VARIABLES GLOBALES ===
 let allBooks = [];
 
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const filteredBooks = allBooks.filter(obra => {
             const objectId = obra.id.toLowerCase();
             // --- CORRECCIÓN AQUÍ ---
-            const titulo = String(obra.get('titulo') || '').toLowerCase();
+            // const titulo = String(obra.get('titulo') || '').toLowerCase();
             const nombreArtistico = String(obra.get('nombreArtistico') || '').toLowerCase(); // Asumiendo este campo existe
             const genero = String(obra.get('genero') || '').toLowerCase();
             // --- CORRECCIÓN AQUÍ ---
