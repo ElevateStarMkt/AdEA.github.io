@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === 3. CARGAR OBRAS DESDE "Encuesta" Y BOTÓN DE AÑADIR ===
+    // === 3. CARGAR OBRAS DESDE "Obras" Y BOTÓN DE AÑADIR ===
     const worksContainer = document.getElementById('works-container');
     const addWorkSection = document.getElementById('add-work-section');
     const addWorkBtn = document.getElementById('add-work-btn');
@@ -162,37 +162,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
                 const maxWorks = limits[userPlan] || 3; // Por defecto, 3
 
-                // 3. Obtener obras activas
-                const Encuesta = Parse.Object.extend("Encuesta");
-                const query = new Parse.Query(Encuesta);
-                query.equalTo("autor", currentUser);
-                query.descending("createdAt");
-                const obras = await query.find();
-                const activeWorksCount = obras.length; // Suponemos que todas las obras en la DB están activas
+                // 3. Obtener obras SOLO de la clase "Obras"
+                const Obra = Parse.Object.extend("Obras"); // Asumiendo que la clase se llama "Obras"
+
+                const queryObras = new Parse.Query(Obra);
+                queryObras.equalTo("autor", currentUser); // Filtrar por autor logueado
+                queryObras.descending("createdAt"); // Ordenar por creación, más reciente primero
+
+                const obrasResult = await queryObras.find();
+
+                const activeWorksCount = obrasResult.length; // Contar solo obras de la clase "Obras"
 
                 // 4. Renderizar obras en el contenedor
                 if (activeWorksCount === 0) {
                     worksContainer.innerHTML = '<p class="no-works">Aún no has añadido ninguna obra. <a href="./encuesta.html">Rellena la encuesta</a> para comenzar.</p>';
                 } else {
-                    worksContainer.innerHTML = obras.map(obra => `
+                    // Asumiendo que la clase "Obras" tiene campos como titulo, genero, enlace, etc.
+                    worksContainer.innerHTML = obrasResult.map(obra => {
+                        const titulo = obra.get('titulo') || obra.get('tituloObra') || 'Sin título'; // Ajusta según tu esquema
+                        const genero = obra.get('genero') || obra.get('generoObra') || 'Sin género'; // Ajusta según tu esquema
+                        const enlace = obra.get('enlace') || obra.get('enlaceObra') || '#'; // Ajusta según tu esquema
+                        // Añade otros campos según tu estructura de 'Obras', como sinopsis, pdfEnlace, etc.
+                        return `
                         <div class="work-card">
-                            <h4>${obra.get('tituloObra')}</h4>
-                            <p class="work-genre">${obra.get('generoObra')}</p>
+                            <h4>${titulo}</h4>
+                            <p class="work-genre">${genero}</p>
                             <span class="work-status">Activa</span>
-                            <a href="${obra.get('enlaceObra')}" target="_blank" class="work-link">Ver obra</a>
+                            <a href="${enlace}" target="_blank" class="work-link">Ver obra</a>
                         </div>
-                    `).join('');
+                    `;
+                    }).join('');
                 }
 
-                // 5. Cargar nombre artístico
+                // 5. Cargar nombre artístico desde la clase "Obras" o como antes
                 let nombreArtistico = 'un autor';
-                const encuestaQuery = new Parse.Query(Encuesta);
-                encuestaQuery.equalTo("autor", currentUser);
-                encuestaQuery.descending("createdAt");
-                const ultimaEncuesta = await encuestaQuery.first();
-                if (ultimaEncuesta) {
-                    nombreArtistico = ultimaEncuesta.get('nombreArtistico') || nombreArtistico;
-                }
+                // Si tienes un campo 'nombreArtistico' en la clase "Obras", cámbialo aquí
+                // Por ejemplo: nombreArtistico = obrasResult[0]?.get('nombreArtistico') || nombreArtistico;
+
+                // Si no, puedes seguir obteniéndolo de la encuesta más reciente si es necesario
+                // const Encuesta = Parse.Object.extend("Encuesta");
+                // const queryEncuesta = new Parse.Query(Encuesta);
+                // queryEncuesta.equalTo("autor", currentUser);
+                // queryEncuesta.descending("createdAt");
+                // const ultimaEncuesta = await queryEncuesta.first();
+                // if (ultimaEncuesta) {
+                //     nombreArtistico = ultimaEncuesta.get('nombreArtistico') || nombreArtistico;
+                // }
+
+                // O simplemente dejarlo como está si ya está en el usuario o no es crítico para el botón
+                // Si lo necesitas, asegúrate de obtenerlo de la fuente correcta.
 
                 // 6. Configurar y mostrar/ocultar botón de añadir obra o upgrade
                 if (addWorkSection) {
@@ -210,7 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     addWorkSection.style.display = 'block'; // Mostrar la sección entera
                 }
-
             } catch (error) {
                 console.error('Error al cargar obras o configurar botón:', error);
                 worksContainer.innerHTML = '<p class="no-works">Error al cargar. <a href="./encuesta.html">Reintentar</a>.</p>';
